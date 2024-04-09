@@ -33,8 +33,8 @@ async function getTracksFromWatchlist(watchlistId) {
             },
         });
         if (!watchlist) throw new Error('Watchlist nicht gefunden');
-        for( track in watchlist.tracks) {
-            console.log(track);
+        for(let i = 0; i < watchlist.tracks.length; i++) {
+            console.log(watchlist.tracks[i].name);
         }
     } catch (error) {
         console.log(error.message);
