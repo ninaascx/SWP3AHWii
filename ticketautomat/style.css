@@ -1,0 +1,13 @@
+body {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: rgb(127, 127, 202);
+    color: white; 
+    font-size: 18px;
+}
+
+* {
+    margin: 0.4em auto;
+    
+}
