@@ -17,9 +17,9 @@ async function getWatchlistNamesForUser(userId) {
             },
         });
         if (!user) throw new Error('Benutzer nicht gefunden');
-        return user.watchLists.map(watchlist => watchlist.name);
+        user.watchLists.map((watchlist) => console.log(watchlist.name));
     } catch (error) {
-        throw new Error(`Fehler beim Abrufen der Watchlist-Namen: ${error.message}`);
+        console.log(error.message);
     }
 }
 
@@ -27,21 +27,19 @@ async function getWatchlistNamesForUser(userId) {
 async function getTracksFromWatchlist(watchlistId) {
     try {
         const watchlist = await prisma.watchlist.findUnique({
+            select: {tracks: true},
             where: {
                 id: watchlistId,
             },
-            include: {
-                tracks: true,
-            },
         });
         if (!watchlist) throw new Error('Watchlist nicht gefunden');
-        return watchlist.tracks;
+        for( track in watchlist.tracks) {
+            console.log(track);
+        }
     } catch (error) {
-        throw new Error(`Fehler beim Abrufen der Musikstücke: ${error.message}`);
+        console.log(error.message);
     }
 }
 
-module.exports = {
-    getWatchlistNamesForUser,
-    getTracksFromWatchlist,
-};
+getWatchlistNamesForUser(1);
+getTracksFromWatchlist(2);
