@@ -1,0 +1,41 @@
+datasource db {
+    provider = "sqlite"
+    url      = "file:./dev.sqlite3"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Zoo {      
+  id        Int @id @default(autoincrement())
+  land      String      
+  stadt     String
+  adresse   String
+  baujahr   Int
+  abteilung Abteilung[]    
+}
+
+model Abteilung {
+    id      Int @id @default(autoincrement())
+    name    String
+    zoo     Zoo @relation(fields: [zooId], references: [id])
+    zooId   Int 
+    mitarbeiter Mitarbeiter[]
+    tiere Tier[]
+}
+
+model Tier {
+    id      Int @id @default(autoincrement())
+    name    String
+    art     String
+    abteilung Abteilung @relation(fields: [abteilungId], references: [id])
+    abteilungId   Int
+}
+
+model Mitarbeiter {
+    id      Int @id @default(autoincrement())
+    name    String
+    abteilung Abteilung @relation(fields: [abteilungId], references: [id])
+    abteilungId   Int
+}
